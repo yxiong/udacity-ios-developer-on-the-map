@@ -44,11 +44,15 @@ class LoginViewController: UIViewController {
             let parsedResult = try! NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
             guard parsedResult.objectForKey("error") == nil else {
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.errorInfoTextField.text! = parsedResult.objectForKey("error")! as! String
+                    self.errorInfoTextField.text = (parsedResult.objectForKey("error")! as! String)
                 })
                 return
             }
-            print(parsedResult)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.errorInfoTextField.text = ""
+                let tabBarController = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+                self.presentViewController(tabBarController, animated: true, completion: nil)
+            })
         }
         task.resume()
     }
