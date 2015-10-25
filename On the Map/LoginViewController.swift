@@ -41,7 +41,14 @@ class LoginViewController: UIViewController {
                 return
             }
             let newData = data.subdataWithRange(NSMakeRange(5, data.length-5))
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            let parsedResult = try! NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+            guard parsedResult.objectForKey("error") == nil else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.errorInfoTextField.text! = parsedResult.objectForKey("error")! as! String
+                })
+                return
+            }
+            print(parsedResult)
         }
         task.resume()
     }
