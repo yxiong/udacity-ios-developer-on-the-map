@@ -12,19 +12,15 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var errorInfoTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        errorInfoTextField.text = ""
     }
 
     @IBAction func loginButtonClicked(sender: AnyObject) {
         guard (!emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty) else {
-            print("Email and/or password field is empty.")
+            errorInfoTextField.text! = "Email and/or password field is empty."
             return
         }
         let urlString = "https://www.udacity.com/api/session"
@@ -36,8 +32,9 @@ class LoginViewController: UIViewController {
         request.HTTPBody = NSString(format: "{\"udacity\": {\"username\": \"%@\", \"password\":\"%@\"}}", emailTextField.text!, passwordTextField.text!).dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
+            guard error == nil else {
                 print("Error returned by request", error)
+                return
             }
             guard let data = data else {
                 print("No data was returned by the request!")
@@ -47,8 +44,6 @@ class LoginViewController: UIViewController {
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
         }
         task.resume()
-        print("Email: ", emailTextField.text)
-        print("Passord: ", passwordTextField.text)
     }
 }
 
