@@ -23,25 +23,21 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonClicked(sender: AnyObject) {
-        if (emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty) {
+        guard (!emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty) else {
             print("Email and/or password field is empty.")
             return
         }
-        let methodParameters: [String: String!] = [
-            "username": emailTextField.text,
-            "password": passwordTextField.text
-        ]
         let urlString = "https://www.udacity.com/api/session"
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"ying@xiongs.org\", \"password\":\"******\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = NSString(format: "{\"udacity\": {\"username\": \"%@\", \"password\":\"%@\"}}", emailTextField.text!, passwordTextField.text!).dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
-                print(error)
+                print("Error returned by request", error)
             }
             guard let data = data else {
                 print("No data was returned by the request!")
