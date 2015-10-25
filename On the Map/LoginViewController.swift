@@ -23,9 +23,12 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonClicked(sender: AnyObject) {
+        if (emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty) {
+            print("Email and/or password field is empty.")
+            return
+        }
         print("Email: ", emailTextField.text)
         print("Passord: ", passwordTextField.text)
     }
-
 }
 
