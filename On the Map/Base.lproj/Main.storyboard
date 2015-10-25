@@ -39,6 +39,9 @@
                                 <rect key="frame" x="281" y="384" width="38" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ys-PN-dIL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -56,6 +59,10 @@
                             <constraint firstItem="2uj-wE-L3S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="iHT-u1-1CG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="sI1-eF-2lg" id="BEc-43-ezC"/>
+                        <outlet property="passwordTextField" destination="2uj-wE-L3S" id="pYi-OB-8ga"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
