@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -22,12 +23,30 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sI1-eF-2lg">
+                                <rect key="frame" x="50" y="264" width="500" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2uj-wE-L3S">
+                                <rect key="frame" x="50" y="308" width="500" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sI1-eF-2lg" secondAttribute="trailing" constant="30" id="9V0-mC-Wi2"/>
                             <constraint firstItem="4ja-YS-HWh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Go9-cE-aoQ"/>
                             <constraint firstItem="4ja-YS-HWh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="119" id="NKh-0B-BsF"/>
+                            <constraint firstItem="sI1-eF-2lg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="WLu-lm-YJe"/>
+                            <constraint firstItem="sI1-eF-2lg" firstAttribute="top" secondItem="4ja-YS-HWh" secondAttribute="bottom" constant="92" id="XiV-am-Bnn"/>
+                            <constraint firstItem="2uj-wE-L3S" firstAttribute="top" secondItem="sI1-eF-2lg" secondAttribute="bottom" constant="14" id="bd8-Je-cNx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2uj-wE-L3S" secondAttribute="trailing" constant="30" id="cOQ-eX-GIJ"/>
+                            <constraint firstItem="2uj-wE-L3S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="iHT-u1-1CG"/>
                         </constraints>
                     </view>
                 </viewController>
