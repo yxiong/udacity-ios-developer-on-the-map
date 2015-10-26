@@ -13,9 +13,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorInfoTextField: UITextField!
+    
+    var appDelegate: AppDelegate!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         errorInfoTextField.text = ""
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     }
 
     @IBAction func loginButtonClicked(sender: AnyObject) {
@@ -50,6 +54,8 @@ class LoginViewController: UIViewController {
             }
             dispatch_async(dispatch_get_main_queue(), {
                 self.errorInfoTextField.text = ""
+                self.appDelegate.accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
+                self.appDelegate.sessionId = ((parsedResult["session"] as! [String: AnyObject])["id"] as! String)
                 let tabBarController = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
                 self.presentViewController(tabBarController, animated: true, completion: nil)
             })

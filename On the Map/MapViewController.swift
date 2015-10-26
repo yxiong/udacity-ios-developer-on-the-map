@@ -10,4 +10,13 @@ import MapKit
 import UIKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    
+    var appDelegate: AppDelegate!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        print("Account Key:", appDelegate.accountKey)
+        print("Session ID:", appDelegate.sessionId)
+    }
 }
