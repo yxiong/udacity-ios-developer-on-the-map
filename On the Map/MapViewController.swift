@@ -31,8 +31,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 print("No data was returned by the request!")
                 return
             }
-
-            print(NSString(data: data, encoding: NSUTF8StringEncoding))
+            let parsedResult = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            let resultsArray = parsedResult.objectForKey("results") as! [NSDictionary]
+            dispatch_async(dispatch_get_main_queue(), {
+                var annotations = [MKPointAnnotation]()
+                for dictionary in resultsArray {
+                    print(dictionary)
+                    print(dictionary.dynamicType)
+                }
+            })
         }
         task.resume()
     }
