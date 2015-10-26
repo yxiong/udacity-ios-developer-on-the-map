@@ -111,13 +111,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cnj-5M-Uvb">
-                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cnj-5M-Uvb">
+                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
                                 <animations/>
                             </mapView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cnj-5M-Uvb" firstAttribute="top" secondItem="D3q-FN-BhS" secondAttribute="bottom" id="Aww-sA-6qR"/>
+                            <constraint firstItem="FoV-dg-JAq" firstAttribute="top" secondItem="Cnj-5M-Uvb" secondAttribute="bottom" id="LhM-SN-Xv4"/>
+                            <constraint firstItem="Cnj-5M-Uvb" firstAttribute="leading" secondItem="PaT-Ag-QaD" secondAttribute="leadingMargin" constant="-20" id="NBB-4F-M7h"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cnj-5M-Uvb" secondAttribute="trailing" constant="-20" id="QdW-ui-SAi"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="raE-cA-IGV"/>
                 </viewController>
