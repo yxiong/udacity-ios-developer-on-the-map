@@ -11,6 +11,8 @@ import UIKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
+    @IBOutlet weak var mapView: MKMapView!
+    
     var appDelegate: AppDelegate!
     
     override func viewDidLoad() {
@@ -36,9 +38,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             dispatch_async(dispatch_get_main_queue(), {
                 var annotations = [MKPointAnnotation]()
                 for dictionary in resultsArray {
-                    print(dictionary)
-                    print(dictionary.dynamicType)
+                    let annotation = MKPointAnnotation()
+                    
+                    let latitude = CLLocationDegrees(dictionary.objectForKey("latitude")! as! Double)
+                    let longitude = CLLocationDegrees(dictionary.objectForKey("longitude")! as! Double)
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    
+                    let firstName = dictionary.objectForKey("firstName") as! String
+                    let lastName = dictionary.objectForKey("lastName") as! String
+                    annotation.title = "\(firstName) \(lastName)"
+                    annotation.subtitle = (dictionary.objectForKey("mediaURL") as! String)
+                    
+                    annotations.append(annotation)
                 }
+                self.mapView.addAnnotations(annotations)
             })
         }
         task.resume()

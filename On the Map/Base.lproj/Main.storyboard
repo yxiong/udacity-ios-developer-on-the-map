@@ -126,6 +126,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="raE-cA-IGV"/>
+                    <connections>
+                        <outlet property="mapView" destination="Cnj-5M-Uvb" id="Huq-p1-eSb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bM-Aa-8E2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
