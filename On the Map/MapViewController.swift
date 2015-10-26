@@ -16,6 +16,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        // Retrieve student location data through parse.com
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            guard error == nil else {
+                print("Error returned by request", error)
+                return
+            }
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+
+            print(NSString(data: data, encoding: NSUTF8StringEncoding))
+        }
+        task.resume()
+    }
+
+    func getUserData() {
 
         let request = NSMutableURLRequest(URL: NSURL(string: NSString(format: "https://www.udacity.com/api/users/%@", appDelegate.accountKey!) as String)!)
         let session = NSURLSession.sharedSession()
