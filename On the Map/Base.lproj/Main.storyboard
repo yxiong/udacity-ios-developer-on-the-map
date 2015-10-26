@@ -99,10 +99,10 @@
             </objects>
             <point key="canvasLocation" x="401" y="512"/>
         </scene>
-        <!--Item 1-->
+        <!--Map View Controller-->
         <scene sceneID="AVY-UQ-Kdl">
             <objects>
-                <viewController id="Uxi-xs-IP9" customClass="MapViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Uxi-xs-IP9" userLabel="Map View Controller" customClass="MapViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D3q-FN-BhS"/>
                         <viewControllerLayoutGuide type="bottom" id="FoV-dg-JAq"/>
@@ -125,7 +125,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Cnj-5M-Uvb" secondAttribute="trailing" constant="-20" id="QdW-ui-SAi"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="raE-cA-IGV"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="raE-cA-IGV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bM-Aa-8E2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
