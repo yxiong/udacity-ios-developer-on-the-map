@@ -56,6 +56,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         task.resume()
     }
+    
+    @IBAction func logoutButtonPushed(sender: AnyObject) {
+        print("Logout button pushed")
+    }
+    
+    @IBAction func addButtonPushed(sender: AnyObject) {
+        print("Add button pushed")
+    }
+    
+    @IBAction func refreshButtonPushed(sender: AnyObject) {
+        print("Refresh button pushed")
+    }
 
     func getUserData() {
 
