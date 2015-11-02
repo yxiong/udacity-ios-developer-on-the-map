@@ -199,35 +199,55 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where are you studying today?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IgQ-u2-5V7">
-                                <rect key="frame" x="50" y="218" width="500" height="30"/>
+                                <rect key="frame" x="40" y="79" width="460" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aet-Rg-0c8">
+                                <rect key="frame" x="0.0" y="159" width="600" height="441"/>
+                                <animations/>
+                            </mapView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Link to Share" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sXf-ux-kgS">
+                                <rect key="frame" x="40" y="119" width="460" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0J-lX-Ykg">
-                                <rect key="frame" x="245" y="288" width="111" height="30"/>
+                                <rect key="frame" x="538" y="79" width="30" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Find on the Map"/>
+                                <state key="normal" title="Find"/>
                                 <connections>
                                     <action selector="findButtonPushed:" destination="Uec-Xy-GHx" eventType="touchUpInside" id="A9o-iU-SGW"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aet-Rg-0c8">
-                                <rect key="frame" x="163" y="388" width="240" height="128"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eii-Oz-huw">
+                                <rect key="frame" x="529" y="119" width="49" height="30"/>
                                 <animations/>
-                            </mapView>
+                                <state key="normal" title="Submit"/>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IgQ-u2-5V7" firstAttribute="leading" secondItem="Rdm-Ei-c4p" secondAttribute="leadingMargin" constant="30" id="146-nA-DYA"/>
+                            <constraint firstItem="sXf-ux-kgS" firstAttribute="leading" secondItem="Rdm-Ei-c4p" secondAttribute="leadingMargin" constant="20" id="1NY-T7-1df"/>
+                            <constraint firstItem="h0X-br-naZ" firstAttribute="top" secondItem="Aet-Rg-0c8" secondAttribute="bottom" id="1af-7A-gxm"/>
                             <constraint firstItem="x40-wb-WDG" firstAttribute="leading" secondItem="Rdm-Ei-c4p" secondAttribute="leadingMargin" constant="-20" id="22x-8f-she"/>
-                            <constraint firstItem="IgQ-u2-5V7" firstAttribute="top" secondItem="x40-wb-WDG" secondAttribute="bottom" constant="154" id="FBf-aF-DNg"/>
-                            <constraint firstItem="Y0J-lX-Ykg" firstAttribute="top" secondItem="IgQ-u2-5V7" secondAttribute="bottom" constant="40" id="FYY-Ds-gAw"/>
+                            <constraint firstItem="Aet-Rg-0c8" firstAttribute="top" secondItem="sXf-ux-kgS" secondAttribute="bottom" constant="10" id="2D2-wW-3NI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sXf-ux-kgS" secondAttribute="trailing" constant="80" id="EJ3-PV-Rfx"/>
+                            <constraint firstItem="IgQ-u2-5V7" firstAttribute="leading" secondItem="Rdm-Ei-c4p" secondAttribute="leadingMargin" constant="20" id="LAk-Wj-2Ga"/>
+                            <constraint firstItem="eii-Oz-huw" firstAttribute="top" secondItem="Y0J-lX-Ykg" secondAttribute="bottom" constant="10" id="Lb3-od-Ouv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="x40-wb-WDG" secondAttribute="trailing" constant="-20" id="MsG-oV-LlG"/>
+                            <constraint firstItem="sXf-ux-kgS" firstAttribute="top" secondItem="IgQ-u2-5V7" secondAttribute="bottom" constant="10" id="Mye-eb-wkz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Aet-Rg-0c8" secondAttribute="trailing" constant="-20" id="RWr-I0-E96"/>
+                            <constraint firstItem="Y0J-lX-Ykg" firstAttribute="top" secondItem="x40-wb-WDG" secondAttribute="bottom" constant="15" id="S0x-iT-PKr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IgQ-u2-5V7" secondAttribute="trailing" constant="80" id="avs-rK-oY4"/>
+                            <constraint firstItem="Aet-Rg-0c8" firstAttribute="leading" secondItem="Rdm-Ei-c4p" secondAttribute="leadingMargin" constant="-20" id="dMU-26-nFa"/>
                             <constraint firstItem="x40-wb-WDG" firstAttribute="top" secondItem="fFC-dd-lNN" secondAttribute="bottom" id="eWK-JI-hmM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IgQ-u2-5V7" secondAttribute="trailing" constant="30" id="l7H-Rc-TU6"/>
-                            <constraint firstItem="Y0J-lX-Ykg" firstAttribute="centerX" secondItem="Rdm-Ei-c4p" secondAttribute="centerX" id="pdy-PY-iJ2"/>
+                            <constraint firstItem="IgQ-u2-5V7" firstAttribute="top" secondItem="x40-wb-WDG" secondAttribute="bottom" constant="15" id="f3f-p9-NfM"/>
+                            <constraint firstItem="Y0J-lX-Ykg" firstAttribute="leading" secondItem="IgQ-u2-5V7" secondAttribute="trailing" constant="38" id="iDs-5L-KWB"/>
+                            <constraint firstItem="Y0J-lX-Ykg" firstAttribute="centerX" secondItem="eii-Oz-huw" secondAttribute="centerX" id="s65-J2-B2N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="car-d7-k8S"/>

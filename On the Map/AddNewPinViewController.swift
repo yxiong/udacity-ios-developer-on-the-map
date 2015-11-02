@@ -14,6 +14,8 @@ class AddNewPinViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     
+    var placemark: MKPlacemark!
+    
     @IBAction func findButtonPushed(sender: AnyObject) {
         guard locationTextField.text != "" else {
             let alert = UIAlertController(title: "Error", message: "Must enter a location.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -46,8 +48,10 @@ class AddNewPinViewController: UIViewController {
                 return
             }
             
-            let item = response!.mapItems[0]
-            self.mapView.addAnnotation(item.placemark)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.placemark = response!.mapItems[0].placemark
+                self.mapView.addAnnotation(self.placemark)
+            })
         })
     }
     
