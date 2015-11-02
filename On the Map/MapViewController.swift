@@ -18,7 +18,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
+        loadMapDataAndDisplay()
+    }
+    
+    func removeAllAnnotations() {
+        let annotationsToRemove = mapView.annotations.filter { $0 !== mapView.userLocation }
+        mapView.removeAnnotations(annotationsToRemove)
+    }
+    
+    func loadMapDataAndDisplay() {
         // Retrieve student location data through parse.com
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -51,6 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     
                     annotations.append(annotation)
                 }
+                self.removeAllAnnotations()
                 self.mapView.addAnnotations(annotations)
             })
         }
@@ -66,11 +75,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func refreshButtonPushed(sender: AnyObject) {
-        print("Refresh button pushed")
+        loadMapDataAndDisplay()
     }
 
     func getUserData() {
-
         let request = NSMutableURLRequest(URL: NSURL(string: NSString(format: "https://www.udacity.com/api/users/%@", appDelegate.accountKey!) as String)!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in// Error checking of response.
