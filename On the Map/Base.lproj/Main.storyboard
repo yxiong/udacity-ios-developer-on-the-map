@@ -176,7 +176,7 @@
         <!--Title-->
         <scene sceneID="eyG-8f-RH4">
             <objects>
-                <viewController id="Uec-Xy-GHx" sceneMemberID="viewController">
+                <viewController id="Uec-Xy-GHx" customClass="AddNewPinViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fFC-dd-lNN"/>
                         <viewControllerLayoutGuide type="bottom" id="h0X-br-naZ"/>
@@ -190,7 +190,11 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="Add A New Pin" id="4Ya-6b-k3T">
-                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="5lD-Tm-a8b"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="5lD-Tm-a8b">
+                                            <connections>
+                                                <action selector="cancelButtonPushed:" destination="Uec-Xy-GHx" id="BdY-VT-MRg"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -204,6 +208,9 @@
                                 <rect key="frame" x="245" y="288" width="111" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Find on the Map"/>
+                                <connections>
+                                    <action selector="findButtonPushed:" destination="Uec-Xy-GHx" eventType="touchUpInside" id="A9o-iU-SGW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -220,6 +227,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="car-d7-k8S"/>
+                    <connections>
+                        <outlet property="locationTextField" destination="IgQ-u2-5V7" id="HMC-JT-Xgk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFf-BG-aH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
