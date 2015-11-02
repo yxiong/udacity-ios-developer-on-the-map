@@ -130,8 +130,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cnj-5M-Uvb">
-                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cnj-5M-Uvb">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <animations/>
                             </mapView>
                         </subviews>
@@ -157,7 +157,7 @@
                                     <action selector="refreshButtonPushed:" destination="Uxi-xs-IP9" id="5VJ-ce-NdC"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Add" systemItem="add" id="ds4-Om-rtW">
+                            <barButtonItem systemItem="add" id="ds4-Om-rtW">
                                 <connections>
                                     <action selector="addButtonPushed:" destination="Uxi-xs-IP9" id="16K-gd-Hic"/>
                                 </connections>
