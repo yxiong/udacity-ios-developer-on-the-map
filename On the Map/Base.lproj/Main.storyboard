@@ -212,6 +212,10 @@
                                     <action selector="findButtonPushed:" destination="Uec-Xy-GHx" eventType="touchUpInside" id="A9o-iU-SGW"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aet-Rg-0c8">
+                                <rect key="frame" x="163" y="388" width="240" height="128"/>
+                                <animations/>
+                            </mapView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -229,6 +233,7 @@
                     <navigationItem key="navigationItem" title="Title" id="car-d7-k8S"/>
                     <connections>
                         <outlet property="locationTextField" destination="IgQ-u2-5V7" id="HMC-JT-Xgk"/>
+                        <outlet property="mapView" destination="Aet-Rg-0c8" id="uIn-2V-gha"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFf-BG-aH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
