@@ -226,6 +226,9 @@
                                 <rect key="frame" x="529" y="119" width="49" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButtonPushed:" destination="Uec-Xy-GHx" eventType="touchUpInside" id="0xG-Yq-M1h"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -252,8 +255,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="car-d7-k8S"/>
                     <connections>
+                        <outlet property="linkTextField" destination="sXf-ux-kgS" id="Kp3-Wh-B54"/>
                         <outlet property="locationTextField" destination="IgQ-u2-5V7" id="HMC-JT-Xgk"/>
                         <outlet property="mapView" destination="Aet-Rg-0c8" id="uIn-2V-gha"/>
+                        <outlet property="submitButton" destination="eii-Oz-huw" id="mnz-aj-4bo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFf-BG-aH2" userLabel="First Responder" sceneMemberID="firstResponder"/>

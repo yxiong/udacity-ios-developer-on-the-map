@@ -12,9 +12,16 @@ import UIKit
 
 class AddNewPinViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var submitButton: UIButton!
     
     var placemark: MKPlacemark!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        submitButton.enabled = false
+    }
     
     @IBAction func findButtonPushed(sender: AnyObject) {
         guard locationTextField.text != "" else {
@@ -51,8 +58,20 @@ class AddNewPinViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.placemark = response!.mapItems[0].placemark
                 self.mapView.addAnnotation(self.placemark)
+                self.submitButton.enabled = true
             })
         })
+    }
+    
+    @IBAction func submitButtonPushed(sender: AnyObject) {
+        guard linkTextField.text != "" else {
+            let alert = UIAlertController(title: "Error", message: "Must enter a link.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        print("SUBMITTING")
+
     }
     
     @IBAction func cancelButtonPushed(sender: AnyObject) {
