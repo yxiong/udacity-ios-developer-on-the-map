@@ -7,8 +7,23 @@
 //
 
 import Foundation
+import MapKit
 import UIKit
 
 class TableViewController: UITableViewController {
+    var annotations: [MKPointAnnotation] {
+        return OnTheMapModel.sharedInstance().annotations
+    }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return annotations.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("MapPinCell")!
+        let annotation = annotations[indexPath.row]
+        cell.textLabel?.text = annotation.title
+        cell.detailTextLabel?.text = annotation.subtitle
+        return cell
+    }
 }
