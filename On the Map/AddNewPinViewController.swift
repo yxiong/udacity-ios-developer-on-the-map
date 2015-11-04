@@ -58,6 +58,8 @@ class AddNewPinViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.placemark = response!.mapItems[0].placemark
                 self.mapView.addAnnotation(self.placemark)
+                let region = MKCoordinateRegionMakeWithDistance(self.placemark.coordinate, 100000, 100000)
+                self.mapView.setRegion(region, animated: true)
                 self.submitButton.enabled = true
             })
         })
@@ -70,8 +72,21 @@ class AddNewPinViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        print("SUBMITTING")
-
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.HTTPMethod = "POST"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = NSString(format: "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"%@\", \"mediaURL\": \"%@\",\"latitude\": %f, \"longitude\": %f}", locationTextField.text!, linkTextField.text!, self.placemark.coordinate.latitude, self.placemark.coordinate.longitude).dataUsingEncoding(NSUTF8StringEncoding)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            guard error == nil else {
+                print("Error returned by request", error)
+                return
+            }
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        }
+        task.resume()
     }
     
     @IBAction func cancelButtonPushed(sender: AnyObject) {
