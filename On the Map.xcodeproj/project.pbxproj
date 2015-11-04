@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0156AA921BE721F00059301A /* AddNewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156AA911BE721F00059301A /* AddNewPinViewController.swift */; };
+		0197B4911BE99ED700BBBB0C /* OnTheMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B4901BE99ED700BBBB0C /* OnTheMapModel.swift */; };
 		01991A831BDC4B2B0060B348 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01991A821BDC4B2B0060B348 /* AppDelegate.swift */; };
 		01991A851BDC4B2B0060B348 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01991A841BDC4B2B0060B348 /* LoginViewController.swift */; };
 		01991A881BDC4B2B0060B348 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01991A861BDC4B2B0060B348 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		0156AA911BE721F00059301A /* AddNewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPinViewController.swift; sourceTree = "<group>"; };
+		0197B4901BE99ED700BBBB0C /* OnTheMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapModel.swift; sourceTree = "<group>"; };
 		01991A7F1BDC4B2B0060B348 /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01991A821BDC4B2B0060B348 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01991A841BDC4B2B0060B348 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				01991A8E1BDC4B2B0060B348 /* Info.plist */,
 				01E2BF9F1BDD2B150085A22E /* MapViewController.swift */,
 				0156AA911BE721F00059301A /* AddNewPinViewController.swift */,
+				0197B4901BE99ED700BBBB0C /* OnTheMapModel.swift */,
 			);
 			path = "On the Map";
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0197B4911BE99ED700BBBB0C /* OnTheMapModel.swift in Sources */,
 				01991A851BDC4B2B0060B348 /* LoginViewController.swift in Sources */,
 				0156AA921BE721F00059301A /* AddNewPinViewController.swift in Sources */,
 				01E2BFA01BDD2B150085A22E /* MapViewController.swift in Sources */,
