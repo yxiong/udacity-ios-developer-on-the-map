@@ -84,7 +84,9 @@ class AddNewPinViewController: UIViewController {
                 print("Error returned by request", error)
                 return
             }
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            dispatch_async(dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
         }
         task.resume()
     }
