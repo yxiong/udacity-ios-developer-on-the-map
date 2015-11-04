@@ -201,7 +201,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="ZBD-Bh-Wib"/>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="f4A-AJ-esm"/>
-                            <barButtonItem systemItem="add" id="mEb-xP-rBs"/>
+                            <barButtonItem systemItem="add" id="mEb-xP-rBs">
+                                <connections>
+                                    <segue destination="Uec-Xy-GHx" kind="presentation" id="ehF-fL-zNe"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
@@ -317,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFf-BG-aH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1758" y="-172"/>
+            <point key="canvasLocation" x="1798" y="147"/>
         </scene>
         <!--TabBarController-->
         <scene sceneID="geO-uM-mSh">
@@ -339,4 +343,7 @@
             <point key="canvasLocation" x="-419" y="184"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ehF-fL-zNe"/>
+    </inferredMetricsTieBreakers>
 </document>
