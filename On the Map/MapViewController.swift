@@ -37,7 +37,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func logoutButtonPushed(sender: AnyObject) {
-        print("Logout button pushed")
+        OnTheMapModel.sharedInstance().logout()
+        let loginController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        self.presentViewController(loginController, animated: true, completion: nil)
     }
     
     func submitNewPin() {

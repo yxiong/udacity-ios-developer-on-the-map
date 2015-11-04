@@ -10,15 +10,13 @@ import Foundation
 import MapKit
 
 class OnTheMapModel: NSObject {
-    var accountKey: String
-    var sessionId: String
+    var accountKey: String!
+    var sessionId: String!
     var userFirstName: String!
     var userLastName: String!
     var annotations: [MKPointAnnotation]
     
     override init() {
-        accountKey = ""
-        sessionId = ""
         annotations = [MKPointAnnotation]()
     }
     
@@ -80,8 +78,16 @@ class OnTheMapModel: NSObject {
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
             let parsedResult = try! NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
             self.userFirstName = ((parsedResult["user"] as! [String: AnyObject])["first_name"] as! String)
-            self.userLastName = ((parsedResult["user"] as! [String: AnyObject])["last_name"] as! String)        }
+            self.userLastName = ((parsedResult["user"] as! [String: AnyObject])["last_name"] as! String)
+        }
         task.resume()
+    }
+    
+    func logout() {
+        accountKey = nil
+        sessionId = nil
+        userFirstName = nil
+        userLastName = nil
     }
     
     func loadAnnotations(completionHandler: () -> Void) {

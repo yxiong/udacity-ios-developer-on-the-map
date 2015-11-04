@@ -39,4 +39,10 @@ class TableViewController: UITableViewController {
             })
         }
     }
+    
+    @IBAction func logoutButtonPushed(sender: AnyObject) {
+        OnTheMapModel.sharedInstance().logout()
+        let loginController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        self.presentViewController(loginController, animated: true, completion: nil)
+    }
 }

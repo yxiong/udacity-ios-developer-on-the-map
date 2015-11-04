@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -197,7 +197,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map" id="6pI-Wh-NEz">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="ZBD-Bh-Wib"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="ZBD-Bh-Wib">
+                            <connections>
+                                <action selector="logoutButtonPushed:" destination="1rP-Vq-1KM" id="P1f-Pz-ikN"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="f4A-AJ-esm">
                                 <connections>
