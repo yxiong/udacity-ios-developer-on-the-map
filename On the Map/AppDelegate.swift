@@ -11,9 +11,6 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var accountKey: String? = nil
-    var sessionId: String? = nil
-
     var window: UIWindow?
 
 

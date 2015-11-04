@@ -10,9 +10,13 @@ import Foundation
 import MapKit
 
 class OnTheMapModel: NSObject {
+    var accountKey: String
+    var sessionId: String
     var annotations: [MKPointAnnotation]
     
     override init() {
+        accountKey = ""
+        sessionId = ""
         annotations = [MKPointAnnotation]()
     }
     
@@ -47,7 +51,11 @@ class OnTheMapModel: NSObject {
                 return
             }
             // Now we successfully logged in, record the account key and session id, and then redirect to map view.
-            completionHandler(success: true, errorString: nil)
+            self.accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
+            self.sessionId = ((parsedResult["session"] as! [String: AnyObject])["id"] as! String)
+            self.loadAnnotations({ () -> Void in
+                completionHandler(success: true, errorString: nil)
+            })
         }
         task.resume()
     }

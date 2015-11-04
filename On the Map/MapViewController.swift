@@ -15,18 +15,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var annotations: [MKPointAnnotation] {
         return OnTheMapModel.sharedInstance().annotations
     }
-
-    
-    var appDelegate: AppDelegate!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        loadMapDataAndDisplay()
+        self.removeAllAnnotations()
+        self.mapView.addAnnotations(self.annotations)
     }
     
     func removeAllAnnotations() {
@@ -68,6 +61,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func refreshButtonPushed(sender: AnyObject) {
         loadMapDataAndDisplay()
     }
+    
+    /*
 
     func getUserData() {
         let request = NSMutableURLRequest(URL: NSURL(string: NSString(format: "https://www.udacity.com/api/users/%@", appDelegate.accountKey!) as String)!)
@@ -87,4 +82,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         task.resume()
     }
+
+    */
 }
