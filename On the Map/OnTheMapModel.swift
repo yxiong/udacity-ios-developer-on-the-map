@@ -16,6 +16,42 @@ class OnTheMapModel: NSObject {
         annotations = [MKPointAnnotation]()
     }
     
+    func login(email: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
+        // Create a request object.
+        let urlString = "https://www.udacity.com/api/session"
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = NSString(format: "{\"udacity\": {\"username\": \"%@\", \"password\":\"%@\"}}", email, password).dataUsingEncoding(NSUTF8StringEncoding)
+        // Submit the request with a session.
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            // Error checking of response.
+            guard error == nil else {
+                print("Error returned by request", error)
+                return
+            }
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            // Handling special format of response data (skipping the first 5 characters).
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length-5))
+            // Parse the returned data.
+            let parsedResult = try! NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+            // Present any error to user, mostly because of the bad credentials.
+            guard parsedResult.objectForKey("error") == nil else {
+                completionHandler(success: false, errorString: (parsedResult.objectForKey("error")! as! String))
+                return
+            }
+            // Now we successfully logged in, record the account key and session id, and then redirect to map view.
+            completionHandler(success: true, errorString: nil)
+        }
+        task.resume()
+    }
+    
     func loadAnnotations(completionHandler: () -> Void) {
         // Retrieve student location data through parse.com
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
