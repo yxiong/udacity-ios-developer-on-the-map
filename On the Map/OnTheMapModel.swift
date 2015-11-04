@@ -16,7 +16,7 @@ class OnTheMapModel: NSObject {
         annotations = [MKPointAnnotation]()
     }
     
-    func loadAnnotations(completionHandler: (annotations: [MKPointAnnotation]) -> Void) {
+    func loadAnnotations(completionHandler: () -> Void) {
         // Retrieve student location data through parse.com
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -48,7 +48,7 @@ class OnTheMapModel: NSObject {
                 
                 self.annotations.append(annotation)
             }
-            completionHandler(annotations: self.annotations)
+            completionHandler()
         }
         task.resume()
     }

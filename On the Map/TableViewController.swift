@@ -11,13 +11,13 @@ import MapKit
 import UIKit
 
 class TableViewController: UITableViewController {
+    var annotations: [MKPointAnnotation] {
+        return OnTheMapModel.sharedInstance().annotations
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-    }
-    
-    var annotations: [MKPointAnnotation] {
-        return OnTheMapModel.sharedInstance().annotations
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,5 +30,13 @@ class TableViewController: UITableViewController {
         cell.textLabel?.text = annotation.title
         cell.detailTextLabel?.text = annotation.subtitle
         return cell
+    }
+    
+    @IBAction func refreshButtonPushed(sender: AnyObject) {
+        OnTheMapModel.sharedInstance().loadAnnotations { (annotations) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
+        }
     }
 }

@@ -12,6 +12,10 @@ import UIKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    var annotations: [MKPointAnnotation] {
+        return OnTheMapModel.sharedInstance().annotations
+    }
+
     
     var appDelegate: AppDelegate!
     
@@ -34,17 +38,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         OnTheMapModel.sharedInstance().loadAnnotations { (annotations) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 self.removeAllAnnotations()
-                self.mapView.addAnnotations(annotations)
+                self.mapView.addAnnotations(self.annotations)
             })
         }
     }
     
     @IBAction func logoutButtonPushed(sender: AnyObject) {
         print("Logout button pushed")
-    }
-    
-    @IBAction func addButtonPushed(sender: AnyObject) {
-        print("Add button pushed")
     }
     
     func submitNewPin() {

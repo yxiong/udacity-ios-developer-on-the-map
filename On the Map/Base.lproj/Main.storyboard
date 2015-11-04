@@ -139,7 +139,6 @@
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="ds4-Om-rtW">
                                 <connections>
-                                    <action selector="addButtonPushed:" destination="Uxi-xs-IP9" id="16K-gd-Hic"/>
                                     <segue destination="Uec-Xy-GHx" kind="presentation" id="ObZ-Uh-vna"/>
                                 </connections>
                             </barButtonItem>
@@ -200,7 +199,11 @@
                     <navigationItem key="navigationItem" title="On The Map" id="6pI-Wh-NEz">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="ZBD-Bh-Wib"/>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="f4A-AJ-esm"/>
+                            <barButtonItem systemItem="refresh" id="f4A-AJ-esm">
+                                <connections>
+                                    <action selector="refreshButtonPushed:" destination="1rP-Vq-1KM" id="zw2-TE-AyN"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="add" id="mEb-xP-rBs">
                                 <connections>
                                     <segue destination="Uec-Xy-GHx" kind="presentation" id="ehF-fL-zNe"/>
