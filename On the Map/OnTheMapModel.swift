@@ -10,10 +10,8 @@ import Foundation
 import MapKit
 
 class OnTheMapModel: NSObject {
-    var accountKey: String!
+    var studentInfo: StudentInfo!
     var sessionId: String!
-    var userFirstName: String!
-    var userLastName: String!
     var annotations: [MKPointAnnotation]
     
     override init() {
@@ -51,18 +49,19 @@ class OnTheMapModel: NSObject {
                 return
             }
             // Now we successfully logged in, record the account key and session id, and then redirect to map view.
-            self.accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
+            let accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
             self.sessionId = ((parsedResult["session"] as! [String: AnyObject])["id"] as! String)
-            self.getUserData()
-            self.loadAnnotations({ () -> Void in
-                completionHandler(success: true, errorString: nil)
+            self.getUserData(accountKey, completionHandler: { () -> Void in
+                self.loadAnnotations({ () -> Void in
+                    completionHandler(success: true, errorString: nil)
+                })
             })
         }
         task.resume()
     }
     
     
-    func getUserData() {
+    func getUserData(accountKey: String, completionHandler: () -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: NSString(format: "https://www.udacity.com/api/users/%@", accountKey) as String)!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in// Error checking of response.
@@ -77,17 +76,17 @@ class OnTheMapModel: NSObject {
             // Handling special format of response data (skipping the first 5 characters).
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
             let parsedResult = try! NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-            self.userFirstName = ((parsedResult["user"] as! [String: AnyObject])["first_name"] as! String)
-            self.userLastName = ((parsedResult["user"] as! [String: AnyObject])["last_name"] as! String)
+            let firstName = ((parsedResult["user"] as! [String: AnyObject])["first_name"] as! String)
+            let lastName = ((parsedResult["user"] as! [String: AnyObject])["last_name"] as! String)
+            self.studentInfo = StudentInfo(dictionary: ["accountKey": accountKey, "firstName": firstName, "lastName": lastName])
+            completionHandler()
         }
         task.resume()
     }
     
     func logout() {
-        accountKey = nil
+        studentInfo = nil
         sessionId = nil
-        userFirstName = nil
-        userLastName = nil
     }
     
     func loadAnnotations(completionHandler: () -> Void) {
@@ -133,7 +132,7 @@ class OnTheMapModel: NSObject {
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = NSString(format: "{\"uniqueKey\": \"%@\", \"firstName\": \"%@\", \"lastName\": \"%@\",\"mapString\": \"%@\", \"mediaURL\": \"%@\",\"latitude\": %f, \"longitude\": %f}", accountKey, userFirstName, userLastName, mapString, mediaURL, placemark.coordinate.latitude, placemark.coordinate.longitude).dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = NSString(format: "{\"uniqueKey\": \"%@\", \"firstName\": \"%@\", \"lastName\": \"%@\",\"mapString\": \"%@\", \"mediaURL\": \"%@\",\"latitude\": %f, \"longitude\": %f}", studentInfo.accountKey, studentInfo.firstName, studentInfo.lastName, mapString, mediaURL, placemark.coordinate.latitude, placemark.coordinate.longitude).dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             guard error == nil else {
@@ -141,7 +140,7 @@ class OnTheMapModel: NSObject {
                 return
             }
             let annotation = MKPointAnnotation()
-            annotation.title = self.userFirstName + " " + self.userLastName
+            annotation.title = self.studentInfo.firstName + " " + self.studentInfo.lastName
             annotation.subtitle = mediaURL
             annotation.coordinate = placemark.coordinate
             self.annotations.insert(annotation, atIndex: 0)
