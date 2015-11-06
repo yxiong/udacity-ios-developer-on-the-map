@@ -105,7 +105,13 @@ class OnTheMapModel: NSObject {
                 print("No data was returned by the request!")
                 return
             }
-            let parsedResult = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            } catch {
+                print("Not able to parse result from server.")
+                return
+            }
             let resultsArray = parsedResult.objectForKey("results") as! [NSDictionary]
             self.annotations.removeAll()
             for dictionary in resultsArray {
