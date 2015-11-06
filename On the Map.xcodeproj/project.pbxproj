@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0154CDCE1BEC6C7A00E119BE /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CDCD1BEC6C7A00E119BE /* StudentInfo.swift */; };
 		0156AA921BE721F00059301A /* AddNewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156AA911BE721F00059301A /* AddNewPinViewController.swift */; };
 		0197B4911BE99ED700BBBB0C /* OnTheMapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B4901BE99ED700BBBB0C /* OnTheMapModel.swift */; };
 		0197B4931BE9C82700BBBB0C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B4921BE9C82700BBBB0C /* TableViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0154CDCD1BEC6C7A00E119BE /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfo.swift; sourceTree = "<group>"; };
 		0156AA911BE721F00059301A /* AddNewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPinViewController.swift; sourceTree = "<group>"; };
 		0197B4901BE99ED700BBBB0C /* OnTheMapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapModel.swift; sourceTree = "<group>"; };
 		0197B4921BE9C82700BBBB0C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				0156AA911BE721F00059301A /* AddNewPinViewController.swift */,
 				0197B4901BE99ED700BBBB0C /* OnTheMapModel.swift */,
 				0197B4921BE9C82700BBBB0C /* TableViewController.swift */,
+				0154CDCD1BEC6C7A00E119BE /* StudentInfo.swift */,
 			);
 			path = "On the Map";
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0154CDCE1BEC6C7A00E119BE /* StudentInfo.swift in Sources */,
 				0197B4911BE99ED700BBBB0C /* OnTheMapModel.swift in Sources */,
 				0197B4931BE9C82700BBBB0C /* TableViewController.swift in Sources */,
 				01991A851BDC4B2B0060B348 /* LoginViewController.swift in Sources */,
