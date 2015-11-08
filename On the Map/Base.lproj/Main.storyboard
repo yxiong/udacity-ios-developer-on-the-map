@@ -44,13 +44,6 @@
                                     <action selector="loginButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ys-PN-dIL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Error Information" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIt-T4-s8E">
-                                <rect key="frame" x="50" y="474" width="500" height="17"/>
-                                <animations/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -65,14 +58,10 @@
                             <constraint firstItem="BmG-v0-0hd" firstAttribute="top" secondItem="2uj-wE-L3S" secondAttribute="bottom" constant="40" id="cGN-Lb-7Vy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2uj-wE-L3S" secondAttribute="trailing" constant="30" id="cOQ-eX-GIJ"/>
                             <constraint firstItem="2uj-wE-L3S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="iHT-u1-1CG"/>
-                            <constraint firstItem="qIt-T4-s8E" firstAttribute="top" secondItem="BmG-v0-0hd" secondAttribute="bottom" constant="60" id="jtW-Mn-rD1"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qIt-T4-s8E" secondAttribute="trailing" constant="30" id="sGg-oR-QtN"/>
-                            <constraint firstItem="qIt-T4-s8E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="uC0-3w-2kk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="sI1-eF-2lg" id="BEc-43-ezC"/>
-                        <outlet property="errorInfoTextField" destination="qIt-T4-s8E" id="fdS-nr-gnL"/>
                         <outlet property="passwordTextField" destination="2uj-wE-L3S" id="pYi-OB-8ga"/>
                     </connections>
                 </viewController>
