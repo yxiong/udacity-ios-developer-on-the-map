@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         // Make sure email and password are not empty.
         guard (!emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty) else {
             let alert = UIAlertController(title: "Error", message: "Email and/or password field is empty.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }

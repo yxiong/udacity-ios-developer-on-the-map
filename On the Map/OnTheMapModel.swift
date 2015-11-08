@@ -54,8 +54,8 @@ class OnTheMapModel: NSObject {
             let accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
             self.sessionId = ((parsedResult["session"] as! [String: AnyObject])["id"] as! String)
             self.getUserData(accountKey, completionHandler: { () -> Void in
-                self.loadStudentInfos({ () -> Void in
-                    completionHandler(success: true, errorString: nil)
+                self.loadStudentInfos({ (success, errorString) -> Void in
+                    completionHandler(success: success, errorString: errorString)
                 })
             })
         }
@@ -93,7 +93,7 @@ class OnTheMapModel: NSObject {
         sessionId = nil
     }
     
-    func loadStudentInfos(completionHandler: () -> Void) {
+    func loadStudentInfos(completionHandler: (success: Bool, errorString: String?) -> Void) {
         // Retrieve student location data through parse.com
         let parameters = ["order": "-updatedAt"]
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation" + OnTheMapModel.escapedParameters(parameters))!)
@@ -102,23 +102,23 @@ class OnTheMapModel: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             guard error == nil else {
-                print("Error returned by request", error)
+                completionHandler(success: false, errorString: error?.description)
                 return
             }
             guard let data = data else {
-                print("No data was returned by the request!")
+                completionHandler(success: false, errorString: "No data was returned by the request!")
                 return
             }
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             } catch {
-                print("Not able to parse result from server.")
+                completionHandler(success: false, errorString: "Not able to parse result from server!")
                 return
             }
             let resultsArray = parsedResult.objectForKey("results") as? [NSDictionary]
             guard resultsArray != nil else {
-                print("Server error: unparseable results array.")
+                completionHandler(success: false, errorString: "Server error: unparseable results array.")
                 return
             }
             self.studentInfos.removeAll()
@@ -132,7 +132,7 @@ class OnTheMapModel: NSObject {
 
                 self.studentInfos.append(StudentInfo(dictionary: ["firstName": firstName, "lastName": lastName, "linkUrl": linkUrl, "latitude": latitude, "longitude": longitude]))
             }
-            completionHandler()
+            completionHandler(success: true, errorString: nil)
         }
         task.resume()
     }

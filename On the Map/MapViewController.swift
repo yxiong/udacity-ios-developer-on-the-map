@@ -68,10 +68,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func loadMapDataAndDisplay() {
-        OnTheMapModel.sharedInstance().loadStudentInfos { () -> Void in
+        OnTheMapModel.sharedInstance().loadStudentInfos { (success, errorString) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-                self.removeAllAnnotations()
-                self.addAllAnnotations()
+                if success {
+                    self.removeAllAnnotations()
+                    self.addAllAnnotations()
+                } else {
+                    let alert = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             })
         }
     }

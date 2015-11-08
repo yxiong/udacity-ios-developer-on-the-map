@@ -38,9 +38,15 @@ class TableViewController: UITableViewController {
     }
     
     @IBAction func refreshButtonPushed(sender: AnyObject) {
-        OnTheMapModel.sharedInstance().loadStudentInfos { () -> Void in
+        OnTheMapModel.sharedInstance().loadStudentInfos { (success, errorString) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
+                if success {
+                    self.tableView.reloadData()
+                } else {
+                    let alert = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             })
         }
     }
