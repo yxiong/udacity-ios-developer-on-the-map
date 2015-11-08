@@ -15,8 +15,10 @@ class OnTheMapModel: NSObject {
     var userLastName: String?
     var sessionId: String?
     var annotations: [MKPointAnnotation]
+    var studentInfos: [StudentInfo]
     
     override init() {
+        studentInfos = [StudentInfo]()
         annotations = [MKPointAnnotation]()
     }
     
@@ -117,6 +119,7 @@ class OnTheMapModel: NSObject {
                 return
             }
             let resultsArray = parsedResult.objectForKey("results") as! [NSDictionary]
+            self.studentInfos.removeAll()
             self.annotations.removeAll()
             for dictionary in resultsArray {
                 let annotation = MKPointAnnotation()
@@ -127,9 +130,11 @@ class OnTheMapModel: NSObject {
                 
                 let firstName = dictionary.objectForKey("firstName") as! String
                 let lastName = dictionary.objectForKey("lastName") as! String
+                let linkUrl = dictionary.objectForKey("mediaURL") as! String
                 annotation.title = "\(firstName) \(lastName)"
                 annotation.subtitle = (dictionary.objectForKey("mediaURL") as! String)
-                
+
+                self.studentInfos.append(StudentInfo(dictionary: ["firstName": firstName, "lastName": lastName, "linkUrl": linkUrl, "latitude": latitude, "longitude": longitude]))
                 self.annotations.append(annotation)
             }
             completionHandler()

@@ -11,8 +11,8 @@ import MapKit
 import UIKit
 
 class TableViewController: UITableViewController {
-    var annotations: [MKPointAnnotation] {
-        return OnTheMapModel.sharedInstance().annotations
+    var studentInfos: [StudentInfo] {
+        return OnTheMapModel.sharedInstance().studentInfos
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -21,23 +21,20 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return annotations.count
+        return studentInfos.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MapPinCell")!
-        let annotation = annotations[indexPath.row]
-        cell.textLabel?.text = annotation.title
-        cell.detailTextLabel?.text = annotation.subtitle
+        let studentInfo = studentInfos[indexPath.row]
+        cell.textLabel?.text = studentInfo.fullName()
+        cell.detailTextLabel?.text = studentInfo.linkUrl
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let app = UIApplication.sharedApplication()
-        let annotation = annotations[indexPath.row]
-        if let toOpen = annotation.subtitle {
-            app.openURL(NSURL(string: toOpen)!)
-        }
+        let studentInfo = studentInfos[indexPath.row]
+        UIApplication.sharedApplication().openURL(NSURL(string: studentInfo.linkUrl)!)
     }
     
     @IBAction func refreshButtonPushed(sender: AnyObject) {

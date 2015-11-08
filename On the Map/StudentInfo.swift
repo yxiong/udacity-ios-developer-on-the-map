@@ -9,13 +9,21 @@
 import Foundation
 
 struct StudentInfo {
-    var accountKey = ""
-    var firstName = ""
-    var lastName = ""
+    var firstName: String
+    var lastName: String
+    var linkUrl: String
+    var latitude: Float
+    var longitude: Float
 
     init(dictionary: [String: AnyObject]) {
-        accountKey = dictionary["accountKey"] as! String
         firstName = dictionary["firstName"] as! String
         lastName = dictionary["lastName"] as! String
+        linkUrl = dictionary["linkUrl"] as! String
+        latitude = dictionary["latitude"] as! Float
+        longitude = dictionary["longitude"] as! Float
+    }
+    
+    func fullName() -> String {
+        return firstName + " " + lastName
     }
 }
