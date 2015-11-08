@@ -85,6 +85,24 @@ class AddNewPinViewController: UIViewController {
         }
     }
     
+    @IBAction func previewButtonPushed(sender: AnyObject) {
+        guard linkTextField.text != "" else {
+            let alert = UIAlertController(title: "Error", message: "Must enter a link.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        let app = UIApplication.sharedApplication()
+        let url = NSURL(string: linkTextField.text!)!
+        if app.canOpenURL(url) {
+            app.openURL(url)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Cannot open link.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func cancelButtonPushed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
