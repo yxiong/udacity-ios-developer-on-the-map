@@ -54,7 +54,7 @@ class OnTheMapModel: NSObject {
             let accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
             self.sessionId = ((parsedResult["session"] as! [String: AnyObject])["id"] as! String)
             self.getUserData(accountKey, completionHandler: { () -> Void in
-                self.loadAnnotations({ () -> Void in
+                self.loadStudentInfos({ () -> Void in
                     completionHandler(success: true, errorString: nil)
                 })
             })
@@ -93,7 +93,7 @@ class OnTheMapModel: NSObject {
         sessionId = nil
     }
     
-    func loadAnnotations(completionHandler: () -> Void) {
+    func loadStudentInfos(completionHandler: () -> Void) {
         // Retrieve student location data through parse.com
         let parameters = ["order": "-updatedAt"]
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation" + OnTheMapModel.escapedParameters(parameters))!)

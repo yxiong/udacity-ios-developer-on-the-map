@@ -38,7 +38,7 @@ class TableViewController: UITableViewController {
     }
     
     @IBAction func refreshButtonPushed(sender: AnyObject) {
-        OnTheMapModel.sharedInstance().loadAnnotations { () -> Void in
+        OnTheMapModel.sharedInstance().loadStudentInfos { () -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
