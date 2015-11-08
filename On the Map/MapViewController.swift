@@ -12,14 +12,15 @@ import UIKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    var annotations: [MKPointAnnotation] {
-        return OnTheMapModel.sharedInstance().annotations
+    
+    var studentInfos: [StudentInfo] {
+        return OnTheMapModel.sharedInstance().studentInfos
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.removeAllAnnotations()
-        self.mapView.addAnnotations(self.annotations)
+        removeAllAnnotations()
+        addAllAnnotations()
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -52,11 +53,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.removeAnnotations(annotationsToRemove)
     }
     
+    func addAllAnnotations() {
+        var annotations = [MKPointAnnotation]()
+        for studentInfo in studentInfos {
+            let annotation = MKPointAnnotation()
+            
+            annotation.coordinate = CLLocationCoordinate2D(latitude: studentInfo.latitude, longitude: studentInfo.longitude)
+            annotation.title = studentInfo.fullName()
+            annotation.subtitle = studentInfo.linkUrl
+            
+            annotations.append(annotation)
+        }
+        mapView.addAnnotations(annotations)
+    }
+    
     func loadMapDataAndDisplay() {
         OnTheMapModel.sharedInstance().loadAnnotations { () -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 self.removeAllAnnotations()
-                self.mapView.addAnnotations(self.annotations)
+                self.addAllAnnotations()
             })
         }
     }
