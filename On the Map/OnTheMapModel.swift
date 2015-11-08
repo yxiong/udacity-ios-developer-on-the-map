@@ -14,12 +14,10 @@ class OnTheMapModel: NSObject {
     var userFirstName: String?
     var userLastName: String?
     var sessionId: String?
-    var annotations: [MKPointAnnotation]
     var studentInfos: [StudentInfo]
     
     override init() {
         studentInfos = [StudentInfo]()
-        annotations = [MKPointAnnotation]()
     }
     
     func login(email: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
@@ -120,22 +118,15 @@ class OnTheMapModel: NSObject {
             }
             let resultsArray = parsedResult.objectForKey("results") as! [NSDictionary]
             self.studentInfos.removeAll()
-            self.annotations.removeAll()
             for dictionary in resultsArray {
-                let annotation = MKPointAnnotation()
-                
                 let latitude = CLLocationDegrees(dictionary.objectForKey("latitude")! as! Double)
                 let longitude = CLLocationDegrees(dictionary.objectForKey("longitude")! as! Double)
-                annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 
                 let firstName = dictionary.objectForKey("firstName") as! String
                 let lastName = dictionary.objectForKey("lastName") as! String
                 let linkUrl = dictionary.objectForKey("mediaURL") as! String
-                annotation.title = "\(firstName) \(lastName)"
-                annotation.subtitle = (dictionary.objectForKey("mediaURL") as! String)
 
                 self.studentInfos.append(StudentInfo(dictionary: ["firstName": firstName, "lastName": lastName, "linkUrl": linkUrl, "latitude": latitude, "longitude": longitude]))
-                self.annotations.append(annotation)
             }
             completionHandler()
         }
@@ -155,11 +146,8 @@ class OnTheMapModel: NSObject {
                 completionHandler(success: false, errorString: error?.description)
                 return
             }
-            let annotation = MKPointAnnotation()
-            annotation.title = self.userFirstName! + " " + self.userLastName!
-            annotation.subtitle = mediaURL
-            annotation.coordinate = placemark.coordinate
-            self.annotations.insert(annotation, atIndex: 0)
+            let studentInfo = StudentInfo(dictionary: ["firstName": self.userFirstName!, "lastName": self.userLastName!, "linkUrl": mediaURL, "latitude": placemark.coordinate.latitude, "longitude": placemark.coordinate.longitude])
+            self.studentInfos.insert(studentInfo, atIndex: 0)
             completionHandler(success: true, errorString: nil)
         }
         task.resume()
