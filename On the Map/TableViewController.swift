@@ -32,6 +32,14 @@ class TableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let app = UIApplication.sharedApplication()
+        let annotation = annotations[indexPath.row]
+        if let toOpen = annotation.subtitle {
+            app.openURL(NSURL(string: toOpen)!)
+        }
+    }
+    
     @IBAction func refreshButtonPushed(sender: AnyObject) {
         OnTheMapModel.sharedInstance().loadAnnotations { () -> Void in
             dispatch_async(dispatch_get_main_queue(), {
