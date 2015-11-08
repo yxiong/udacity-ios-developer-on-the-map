@@ -72,7 +72,7 @@ class AddNewPinViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        OnTheMapModel.sharedInstance().addNewAnnotationAndSubmit(locationTextField.text!, mediaURL: linkTextField.text!, placemark: self.placemark) { (success, errorString) -> Void in
+        OnTheMapModel.sharedInstance().addNewStudentInfoAndSubmit(locationTextField.text!, mediaURL: linkTextField.text!, placemark: self.placemark) { (success, errorString) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 if (success) {
                     self.dismissViewControllerAnimated(true, completion: nil)
