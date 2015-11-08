@@ -133,7 +133,7 @@ class OnTheMapModel: NSObject {
         task.resume()
     }
     
-    func addNewAnnotationAndSubmit(mapString: String, mediaURL: String, placemark: MKPlacemark, completionHandler: () -> Void) {
+    func addNewAnnotationAndSubmit(mapString: String, mediaURL: String, placemark: MKPlacemark, completionHandler: (success: Bool, errorString: String?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.HTTPMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -143,7 +143,7 @@ class OnTheMapModel: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             guard error == nil else {
-                print("Error returned by request", error)
+                completionHandler(success: false, errorString: error?.description)
                 return
             }
             let annotation = MKPointAnnotation()
@@ -151,7 +151,7 @@ class OnTheMapModel: NSObject {
             annotation.subtitle = mediaURL
             annotation.coordinate = placemark.coordinate
             self.annotations.insert(annotation, atIndex: 0)
-            completionHandler()
+            completionHandler(success: true, errorString: nil)
         }
         task.resume()
     }

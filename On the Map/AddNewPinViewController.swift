@@ -72,9 +72,15 @@ class AddNewPinViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        OnTheMapModel.sharedInstance().addNewAnnotationAndSubmit(locationTextField.text!, mediaURL: linkTextField.text!, placemark: self.placemark) { () -> Void in
+        OnTheMapModel.sharedInstance().addNewAnnotationAndSubmit(locationTextField.text!, mediaURL: linkTextField.text!, placemark: self.placemark) { (success, errorString) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                if (success) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Error", message: errorString!, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             })
         }
     }
