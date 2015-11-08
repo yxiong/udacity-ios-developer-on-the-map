@@ -102,6 +102,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cnj-5M-Uvb">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <animations/>
+                                <connections>
+                                    <outlet property="delegate" destination="Uxi-xs-IP9" id="aK3-4M-tRl"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <animations/>
@@ -340,6 +343,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ehF-fL-zNe"/>
+        <segue reference="ObZ-Uh-vna"/>
     </inferredMetricsTieBreakers>
 </document>
