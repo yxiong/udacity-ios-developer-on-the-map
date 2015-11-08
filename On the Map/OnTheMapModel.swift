@@ -116,9 +116,13 @@ class OnTheMapModel: NSObject {
                 print("Not able to parse result from server.")
                 return
             }
-            let resultsArray = parsedResult.objectForKey("results") as! [NSDictionary]
+            let resultsArray = parsedResult.objectForKey("results") as? [NSDictionary]
+            guard resultsArray != nil else {
+                print("Server error: unparseable results array.")
+                return
+            }
             self.studentInfos.removeAll()
-            for dictionary in resultsArray {
+            for dictionary in resultsArray! {
                 let latitude = CLLocationDegrees(dictionary.objectForKey("latitude")! as! Double)
                 let longitude = CLLocationDegrees(dictionary.objectForKey("longitude")! as! Double)
                 
