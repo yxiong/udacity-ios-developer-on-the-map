@@ -15,6 +15,7 @@ class AddNewPinViewController: UIViewController {
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var placemark: MKPlacemark!
     
@@ -31,6 +32,7 @@ class AddNewPinViewController: UIViewController {
             return
         }
         
+        activityIndicator.startAnimating()
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = locationTextField.text
         request.region = mapView.region
@@ -56,6 +58,7 @@ class AddNewPinViewController: UIViewController {
             }
             
             dispatch_async(dispatch_get_main_queue(), {
+                self.activityIndicator.stopAnimating()
                 self.placemark = response!.mapItems[0].placemark
                 self.mapView.addAnnotation(self.placemark)
                 let region = MKCoordinateRegionMakeWithDistance(self.placemark.coordinate, 100000, 100000)
