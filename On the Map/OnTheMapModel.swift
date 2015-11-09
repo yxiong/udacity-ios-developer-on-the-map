@@ -34,11 +34,11 @@ class OnTheMapModel: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             // Error checking of response.
             guard error == nil else {
-                print("Error returned by request", error)
+                completionHandler(success: false, errorString: error?.localizedDescription)
                 return
             }
             guard let data = data else {
-                print("No data was returned by the request!")
+                completionHandler(success: false, errorString: "No data was returned by the request!")
                 return
             }
             // Handling special format of response data (skipping the first 5 characters).
@@ -53,26 +53,30 @@ class OnTheMapModel: NSObject {
             // Now we successfully logged in, record the account key and session id, and then redirect to map view.
             let accountKey = ((parsedResult["account"] as! [String: AnyObject])["key"] as! String)
             self.sessionId = ((parsedResult["session"] as! [String: AnyObject])["id"] as! String)
-            self.getUserData(accountKey, completionHandler: { () -> Void in
-                self.loadStudentInfos({ (success, errorString) -> Void in
-                    completionHandler(success: success, errorString: errorString)
-                })
+            self.getUserData(accountKey, completionHandler: { (success, errorString) -> Void in
+                if (success) {
+                    self.loadStudentInfos({ (success, errorString) -> Void in
+                        completionHandler(success: success, errorString: errorString)
+                    })
+                } else {
+                    completionHandler(success: false, errorString: errorString)
+                }
             })
         }
         task.resume()
     }
     
     
-    func getUserData(accountKey: String, completionHandler: () -> Void) {
+    func getUserData(accountKey: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: NSString(format: "https://www.udacity.com/api/users/%@", accountKey) as String)!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in// Error checking of response.
             guard error == nil else {
-                print("Error returned by request", error)
+                completionHandler(success: false, errorString: error?.localizedDescription)
                 return
             }
             guard let data = data else {
-                print("No data was returned by the request!")
+                completionHandler(success: false, errorString: "No data was returned by the request!")
                 return
             }
             // Handling special format of response data (skipping the first 5 characters).
@@ -81,7 +85,7 @@ class OnTheMapModel: NSObject {
             self.userFirstName = ((parsedResult["user"] as! [String: AnyObject])["first_name"] as! String)
             self.userLastName = ((parsedResult["user"] as! [String: AnyObject])["last_name"] as! String)
             self.accountKey = accountKey
-            completionHandler()
+            completionHandler(success: true, errorString: nil)
         }
         task.resume()
     }
