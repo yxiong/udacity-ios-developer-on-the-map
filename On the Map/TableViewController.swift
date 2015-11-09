@@ -11,29 +11,25 @@ import MapKit
 import UIKit
 
 class TableViewController: UITableViewController {
-    var studentInfos: [StudentInfo] {
-        return OnTheMapModel.sharedInstance().studentInfos
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studentInfos.count
+        return OnTheMapModel.sharedInstance().studentInfos.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MapPinCell")!
-        let studentInfo = studentInfos[indexPath.row]
+        let studentInfo = OnTheMapModel.sharedInstance().studentInfos[indexPath.row]
         cell.textLabel?.text = studentInfo.fullName()
         cell.detailTextLabel?.text = studentInfo.linkUrl
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let studentInfo = studentInfos[indexPath.row]
+        let studentInfo = OnTheMapModel.sharedInstance().studentInfos[indexPath.row]
         UIApplication.sharedApplication().openURL(NSURL(string: studentInfo.linkUrl)!)
     }
     

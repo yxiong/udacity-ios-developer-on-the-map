@@ -12,11 +12,7 @@ import UIKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    var studentInfos: [StudentInfo] {
-        return OnTheMapModel.sharedInstance().studentInfos
-    }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         removeAllAnnotations()
@@ -55,7 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func addAllAnnotations() {
         var annotations = [MKPointAnnotation]()
-        for studentInfo in studentInfos {
+        for studentInfo in OnTheMapModel.sharedInstance().studentInfos {
             let annotation = MKPointAnnotation()
             
             annotation.coordinate = CLLocationCoordinate2D(latitude: studentInfo.latitude, longitude: studentInfo.longitude)
