@@ -33,12 +33,8 @@ class AddNewPinViewController: UIViewController {
         }
         
         activityIndicator.startAnimating()
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = locationTextField.text
-        request.region = mapView.region
-        let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler({(response, error) in
-            
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(locationTextField.text!) { (placemarks, error) -> Void in
             guard error == nil else {
                 dispatch_async(dispatch_get_main_queue(), {
                     let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
@@ -48,7 +44,7 @@ class AddNewPinViewController: UIViewController {
                 return
             }
             
-            guard response!.mapItems.count > 0 else {
+            guard placemarks!.count > 0 else {
                 dispatch_async(dispatch_get_main_queue(), {
                     let alert = UIAlertController(title: "Error", message: "No Match Found.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
@@ -59,13 +55,13 @@ class AddNewPinViewController: UIViewController {
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.activityIndicator.stopAnimating()
-                self.placemark = response!.mapItems[0].placemark
+                self.placemark = MKPlacemark(placemark: placemarks![0])
                 self.mapView.addAnnotation(self.placemark)
                 let region = MKCoordinateRegionMakeWithDistance(self.placemark.coordinate, 100000, 100000)
                 self.mapView.setRegion(region, animated: true)
                 self.submitButton.enabled = true
             })
-        })
+        }
     }
     
     @IBAction func submitButtonPushed(sender: AnyObject) {
